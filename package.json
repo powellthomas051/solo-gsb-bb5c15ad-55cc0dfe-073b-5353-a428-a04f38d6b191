@@ -1,0 +1,14 @@
+{
+  "name": "srt-resync-tool",
+  "version": "1.0.0",
+  "description": "供纪录片剪辑师使用的 SRT 字幕时间校正工具（锚点分段线性映射）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/convert.test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

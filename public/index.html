@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRT 字幕时间校正工具</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>SRT 字幕时间校正工具</h1>
+    <p class="subtitle">按“原片时间 → 成片时间”锚点对字幕做分段线性映射，供纪录片剪辑对齐使用。</p>
+
+    <section class="card">
+      <h2>1. 输入 SRT 字幕</h2>
+      <div class="row">
+        <input type="file" id="fileInput" accept=".srt,.txt" />
+        <button type="button" id="loadSampleBtn" class="secondary">载入示例</button>
+        <button type="button" id="clearBtn" class="secondary">清空</button>
+      </div>
+      <textarea id="srtInput" rows="10" placeholder="在此粘贴 SRT 内容，或选择 .srt 文件上传…"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>2. 设置锚点（至少两个，两组时间均须严格递增）</h2>
+      <table class="anchor-table">
+        <thead>
+          <tr><th>#</th><th>原片时间</th><th>成片时间</th><th></th></tr>
+        </thead>
+        <tbody id="anchorBody"></tbody>
+      </table>
+      <button type="button" id="addAnchorBtn" class="secondary">+ 添加锚点</button>
+    </section>
+
+    <section class="card">
+      <h2>3. 校正与导出</h2>
+      <div class="row">
+        <button type="button" id="convertBtn">开始校正</button>
+        <button type="button" id="downloadBtn" disabled>下载校正后的 SRT</button>
+      </div>
+      <div id="message" class="message" hidden></div>
+    </section>
+
+    <section class="card" id="resultCard" hidden>
+      <h2>时间对照（共 <span id="entryCount">0</span> 条）</h2>
+      <div class="table-wrap">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>序号</th><th>原开始</th><th>原结束</th>
+              <th>新开始</th><th>新结束</th><th>正文</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

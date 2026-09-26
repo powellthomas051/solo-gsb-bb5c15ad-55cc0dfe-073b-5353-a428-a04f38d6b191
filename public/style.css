@@ -1,0 +1,84 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  background: #f4f5f7;
+  color: #24292f;
+}
+
+.container { max-width: 1080px; margin: 0 auto; padding: 24px 16px 64px; }
+
+h1 { font-size: 24px; margin: 8px 0 4px; }
+.subtitle { color: #57606a; margin-top: 0; }
+
+.card {
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+.card h2 { font-size: 17px; margin: 0 0 12px; }
+
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+
+textarea {
+  width: 100%;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 8px;
+  resize: vertical;
+}
+
+button {
+  background: #1f6feb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: #1a5fd0; }
+button:disabled { background: #9ec5fe; cursor: not-allowed; }
+button.secondary { background: #eaeef2; color: #24292f; }
+button.secondary:hover { background: #d8dee4; }
+button.danger { background: #cf222e; padding: 4px 10px; font-size: 13px; }
+
+.anchor-table, .result-table { border-collapse: collapse; width: 100%; }
+.anchor-table th, .anchor-table td,
+.result-table th, .result-table td {
+  border: 1px solid #d0d7de;
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 13px;
+}
+.anchor-table th, .result-table th { background: #f6f8fa; }
+
+.anchor-table input {
+  width: 160px;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  padding: 5px 8px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+
+.result-table td.time { font-family: Consolas, monospace; white-space: nowrap; }
+.result-table td.text { white-space: pre-wrap; max-width: 320px; }
+.result-table tr.problem td { background: #ffebe9; }
+
+.table-wrap { overflow-x: auto; }
+
+.message {
+  margin-top: 12px;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+.message.error { background: #ffebe9; border: 1px solid #ff818266; color: #82071e; }
+.message.ok { background: #dafbe1; border: 1px solid #4ac26b66; color: #116329; }
