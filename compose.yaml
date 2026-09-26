@@ -1,0 +1,8 @@
+services:
+  srt-corrector:
+    build: .
+    image: srt-anchor-corrector:latest
+    container_name: srt-anchor-corrector
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRT 字幕时间锚点校正工具</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>SRT 字幕时间锚点校正工具</h1>
+    <p class="subtitle">
+      为纪录片剪辑师准备：录入至少两个「原片时间 → 成片时间」锚点，
+      工具按相邻锚点分段线性映射每条字幕的起止时间，锚点范围外沿用最近锚点的固定偏移。
+    </p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>1. 输入 SRT 字幕</h2>
+      <div class="row">
+        <label class="file-btn">
+          上传 .srt 文件
+          <input type="file" id="srtFile" accept=".srt,text/plain" hidden />
+        </label>
+        <button type="button" id="clearSrt" class="btn-ghost">清空</button>
+        <span id="fileName" class="hint"></span>
+      </div>
+      <textarea id="srtInput" rows="10"
+        placeholder="在此粘贴 SRT 内容，或点击上方按钮上传 .srt 文件……&#10;&#10;1&#10;00:00:05,000 --> 00:00:08,000&#10;第一行字幕"></textarea>
+    </section>
+
+    <section class="panel">
+      <h2>2. 录入时间锚点</h2>
+      <p class="hint">
+        时间格式 <code>HH:MM:SS,mmm</code>（毫秒分隔符用逗号或句点均可）。
+        原片时间与成片时间都必须<strong>严格递增</strong>；至少两个锚点。
+      </p>
+      <table class="anchor-table">
+        <thead>
+          <tr>
+            <th style="width:3rem">#</th>
+            <th>原片时间</th>
+            <th class="arrow-col"></th>
+            <th>成片时间</th>
+            <th style="width:4rem"></th>
+          </tr>
+        </thead>
+        <tbody id="anchorBody"></tbody>
+      </table>
+      <div class="row">
+        <button type="button" id="addAnchor" class="btn-ghost">+ 添加锚点</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. 校正与导出</h2>
+      <div class="row">
+        <button type="button" id="runBtn" class="btn-primary">计算校正预览</button>
+        <button type="button" id="downloadBtn" class="btn-primary" disabled>下载校正后的 SRT</button>
+        <span id="statusText" class="hint"></span>
+      </div>
+      <div id="errorBox" class="error-box" hidden></div>
+    </section>
+
+    <section class="panel" id="resultPanel" hidden>
+      <h2>4. 时间对照</h2>
+      <div class="table-wrap">
+        <table class="cue-table">
+          <thead>
+            <tr>
+              <th style="width:3rem">序号</th>
+              <th>原开始 → 新开始</th>
+              <th>原结束 → 新结束</th>
+              <th>正文</th>
+            </tr>
+          </thead>
+          <tbody id="cueBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="hint">映射结果按毫秒取整；如映射后起止倒置或字幕顺序倒置，将阻止导出。</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
